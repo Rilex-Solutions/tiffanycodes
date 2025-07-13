@@ -7,12 +7,9 @@ import {
 	Github,
 	Linkedin,
 	Mail,
-	Code,
-	Palette,
-	Smartphone,
-	Globe,
 	ExternalLink,
 } from "lucide-react";
+import { personalInfo } from "./data/personal";
 
 const Portfolio = () => {
 	const [isMenuOpen, setIsMenuOpen] =
@@ -63,92 +60,9 @@ const Portfolio = () => {
 		);
 	};
 
-	const services = [
-		{
-			icon: Code,
-			title: "Frontend Development",
-			description: "Modern React applications with responsive design and optimal performance",
-			color: "purple",
-			technologies: [
-				"React",
-				"TypeScript",
-				"Tailwind CSS",
-				"Next.js",
-			],
-		},
-		{
-			icon: Globe,
-			title: "Full Stack Development",
-			description: "End-to-end web solutions with robust backend architecture",
-			color: "teal",
-			technologies: [
-				"Node.js",
-				"PostgreSQL",
-				"Express",
-				"MongoDB",
-			],
-		},
-		{
-			icon: Palette,
-			title: "UI/UX Design",
-			description: "User-centered design with modern aesthetics and intuitive interactions",
-			color: "pink",
-			technologies: [
-				"Figma",
-				"Framer",
-				"Adobe XD",
-				"Prototyping",
-			],
-		},
-		{
-			icon: Smartphone,
-			title: "Mobile Development",
-			description: "Cross-platform mobile apps and progressive web applications",
-			color: "purple",
-			technologies: [
-				"React Native",
-				"PWA",
-				"Flutter",
-				"Expo",
-			],
-		},
-	];
+	const services = [];
 
-	const projects = [
-		{
-			title: "E-Commerce Platform",
-			description: "Full-stack marketplace with payment integration and real-time features",
-			tech: [
-				"React",
-				"Node.js",
-				"Stripe",
-				"Socket.io",
-			],
-			gradient: "from-purple-500 to-pink-500",
-		},
-		{
-			title: "Task Management App",
-			description: "Collaborative project management tool with team features",
-			tech: [
-				"Next.js",
-				"PostgreSQL",
-				"Prisma",
-				"Tailwind",
-			],
-			gradient: "from-teal-500 to-purple-500",
-		},
-		{
-			title: "Analytics Dashboard",
-			description: "Real-time data visualization dashboard with custom charts",
-			tech: [
-				"React",
-				"D3.js",
-				"Express",
-				"MongoDB",
-			],
-			gradient: "from-pink-500 to-purple-500",
-		},
-	];
+	const projects = [];
 
 	return (
 		<div className="min-h-screen bg-gray-50 overflow-x-hidden">
@@ -170,10 +84,12 @@ const Portfolio = () => {
 							}
 						>
 							<span className="text-2xl">
-								👋
+								🦄
 							</span>
 							<span className="ml-2 font-bold text-xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-								DevPortfolio
+								Tiffany's
+								Dev
+								Portfolio
 							</span>
 						</div>
 
@@ -444,16 +360,15 @@ const Portfolio = () => {
 
 							<div className="relative">
 								<div className="w-80 h-80 lg:w-96 lg:h-96 mx-auto bg-gradient-to-br from-purple-200 via-pink-200 to-teal-200 rounded-full overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
-									<div className="w-full h-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+									<div className="w-full h-full bg-gradient-to-br from-purple-100 to-grey-100 flex items-center justify-center">
 										<div className="text-purple-600 text-center">
-											<div className="text-8xl mb-4 animate-bounce">
-												👨‍💻
+											<div className="text-8xl mb-4">
+												<img
+													src="/images/TiffanyHall.png"
+													alt="Tiffany is a joyful unicorn that loves to knit and code."
+													className="w-56 h-68 mx-auto rounded-full object-fit"
+												/>
 											</div>
-											<p className="text-sm font-medium">
-												Your
-												Photo
-												Here
-											</p>
 										</div>
 									</div>
 								</div>
@@ -690,24 +605,35 @@ const Portfolio = () => {
 								</span>
 								<span className="text-2xl font-bold">
 									DevPortfolio
+									!
 								</span>
 							</div>
 							<p className="text-purple-200 mb-4">
 								Full
 								Stack
-								Developer
+								Developer,
+								Techinical
+								Product
+								Owner,
 								&
-								UI/UX
-								Enthusiast
+								Technical
+								Livestream
+								and
+								Event
+								Host
 							</p>
 							<p className="text-purple-300 text-sm">
-								hello@yourname.com
+								{
+									personalInfo.email
+								}
 							</p>
 						</div>
 
 						<div className="flex space-x-6">
 							<a
-								href="https://github.com"
+								href={
+									personalInfo.github
+								}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="p-3 bg-white/10 rounded-full text-purple-300 hover:text-white hover:bg-white/20 transition-all duration-300"
@@ -719,7 +645,9 @@ const Portfolio = () => {
 								/>
 							</a>
 							<a
-								href="https://linkedin.com"
+								href={
+									personalInfo.linkedin
+								}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="p-3 bg-white/10 rounded-full text-purple-300 hover:text-white hover:bg-white/20 transition-all duration-300"
@@ -731,7 +659,9 @@ const Portfolio = () => {
 								/>
 							</a>
 							<a
-								href="mailto:hello@yourname.com"
+								href={
+									personalInfo.email
+								}
 								className="p-3 bg-white/10 rounded-full text-purple-300 hover:text-white hover:bg-white/20 transition-all duration-300"
 							>
 								<Mail
@@ -747,8 +677,7 @@ const Portfolio = () => {
 						<p className="text-purple-200 text-sm">
 							©
 							2025
-							Your
-							Name.
+							tHALL3000
 							Crafted
 							with
 							React

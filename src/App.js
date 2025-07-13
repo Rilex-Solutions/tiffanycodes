@@ -366,7 +366,7 @@ const Portfolio = () => {
 												<img
 													src="/images/TiffanyHall.png"
 													alt="Tiffany is a joyful unicorn that loves to knit and code."
-													className="w-56 h-68 mx-auto rounded-full object-fit"
+													className="w-full h-full object-cover rounded-full transform scale-75 -translate-y-18"
 												/>
 											</div>
 										</div>

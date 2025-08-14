@@ -1,38 +1,139 @@
-.App {
-  text-align: center;
+/* === LAYOUT & SECTIONS === */
+.hero-section {
+  @apply pt-24 pb-12 lg:pt-32 lg:pb-20;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.section-white {
+  @apply py-20 bg-white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.section-gray {
+  @apply py-20 bg-gray-50;
+}
+
+.section-title {
+  @apply text-3xl lg:text-4xl font-bold text-gray-900 mb-4;
+}
+
+.section-description {
+  @apply text-gray-600 max-w-2xl mx-auto text-lg;
+}
+
+/* === HERO ELEMENTS === */
+.availability-badge {
+  @apply flex items-center text-pink-500 text-sm font-medium;
+}
+
+.hero-title {
+  @apply text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight;
+}
+
+.hero-description {
+  @apply text-lg text-gray-600 max-w-lg leading-relaxed;
+}
+
+.gradient-text-purple {
+  background: linear-gradient(to right, #9333ea, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-teal {
+  background: linear-gradient(to right, #14b8a6, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === BUTTONS === */
+.btn-primary {
+  @apply bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full 
+         hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg 
+         hover:shadow-xl transform hover:scale-105 flex items-center justify-center;
+}
+
+.btn-secondary {
+  @apply bg-gradient-to-r from-teal-500 to-purple-500 text-white px-8 py-4 rounded-full 
+         hover:from-teal-600 hover:to-purple-600 transition-all duration-300 shadow-lg 
+         hover:shadow-xl transform hover:scale-105;
+}
+
+.social-link {
+  @apply text-gray-600 hover:text-purple-600 transition-colors;
+}
+
+/* === PROFILE IMAGE === */
+.profile-image-container {
+  @apply w-80 h-80 lg:w-96 lg:h-96 mx-auto bg-gradient-to-br from-purple-200 via-pink-200 to-teal-200 
+         rounded-full overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500;
+}
+
+.profile-image {
+  @apply w-full h-full object-contain rounded-full;
+}
+
+.animated-dots {
+  @apply absolute -top-8 -right-8 w-32 h-32 opacity-30;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(168, 85, 247, 0.4) 0px,
+    rgba(168, 85, 247, 0.4) 2px,
+    transparent 2px,
+    transparent 16px
+  );
+  border-radius: 50%;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* === SKILLS & CONTACT === */
+.skills-container {
+  @apply flex flex-wrap gap-3;
+}
+
+.skill-tag {
+  @apply px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 
+         rounded-full font-medium text-sm;
+}
+
+.contact-card {
+  @apply bg-gradient-to-br from-purple-100 via-pink-50 to-teal-50 rounded-2xl p-8 shadow-lg;
+}
+
+.contact-info {
+  @apply flex items-center justify-center space-x-2 text-gray-700;
+}
+
+/* === FOOTER === */
+.footer {
+  @apply bg-gradient-to-r from-purple-900 via-pink-900 to-teal-900 text-white py-16;
+}
+
+.footer-title {
+  @apply text-3xl lg:text-4xl font-bold mb-4;
+}
+
+.footer-description {
+  @apply text-purple-200 text-lg max-w-2xl mx-auto;
+}
+
+.footer-social {
+  @apply p-3 bg-white/10 rounded-full text-purple-300 hover:text-white 
+         hover:bg-white/20 transition-all duration-300;
+}
+
+/* === RESPONSIVE UTILITIES === */
+@media (max-width: 768px) {
+  .hero-title {
+    @apply text-3xl;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  
+  .section-title {
+    @apply text-2xl;
   }
 }

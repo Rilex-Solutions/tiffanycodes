@@ -11,7 +11,7 @@ export const projects = [
 			"Photography",
 		],
 		gradient: "from-purple-500 to-pink-500",
-		image: "/images/knitters-therapy-screenshot.png",
+		image: "/images/knitterstherapy.png",
 		url: "https://knitterstherapycolorado.com",
 		metrics: "2,100+ monthly visitors, 400+ email subscribers",
 	},
@@ -30,7 +30,7 @@ export const projects = [
 			"Invoice Generation",
 		],
 		gradient: "from-teal-500 to-purple-500",
-		image: "/images/huberduberkid-screenshot.png",
+		image: "/images/huberduberkid.png",
 		url: "https://www.huberduberkidresincreations.com",
 	},
 	{

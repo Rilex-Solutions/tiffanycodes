@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tiffanycodes/static/css/main.b63775c3.css",
-    "main.js": "/tiffanycodes/static/js/main.f1b12f35.js",
-    "static/js/453.af2f6d48.chunk.js": "/tiffanycodes/static/js/453.af2f6d48.chunk.js",
-    "index.html": "/tiffanycodes/index.html",
-    "main.b63775c3.css.map": "/tiffanycodes/static/css/main.b63775c3.css.map",
-    "main.f1b12f35.js.map": "/tiffanycodes/static/js/main.f1b12f35.js.map",
-    "453.af2f6d48.chunk.js.map": "/tiffanycodes/static/js/453.af2f6d48.chunk.js.map"
+    "main.css": "/static/css/main.b63775c3.css",
+    "main.js": "/static/js/main.d666dd05.js",
+    "static/js/453.af2f6d48.chunk.js": "/static/js/453.af2f6d48.chunk.js",
+    "index.html": "/index.html",
+    "main.b63775c3.css.map": "/static/css/main.b63775c3.css.map",
+    "main.d666dd05.js.map": "/static/js/main.d666dd05.js.map",
+    "453.af2f6d48.chunk.js.map": "/static/js/453.af2f6d48.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b63775c3.css",
-    "static/js/main.f1b12f35.js"
+    "static/js/main.d666dd05.js"
   ]
 }

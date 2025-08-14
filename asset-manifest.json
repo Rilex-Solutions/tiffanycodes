@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/tiffanycodes/static/css/main.b63775c3.css",
+    "main.js": "/tiffanycodes/static/js/main.f1b12f35.js",
+    "static/js/453.af2f6d48.chunk.js": "/tiffanycodes/static/js/453.af2f6d48.chunk.js",
+    "index.html": "/tiffanycodes/index.html",
+    "main.b63775c3.css.map": "/tiffanycodes/static/css/main.b63775c3.css.map",
+    "main.f1b12f35.js.map": "/tiffanycodes/static/js/main.f1b12f35.js.map",
+    "453.af2f6d48.chunk.js.map": "/tiffanycodes/static/js/453.af2f6d48.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b63775c3.css",
+    "static/js/main.f1b12f35.js"
+  ]
+}

@@ -4,12 +4,14 @@ import {
 	X,
 	MapPin,
 	ArrowRight,
-	Github,
-	Linkedin,
+	Github as GitHubIcon,
+	Linkedin as LinkedinIcon,
 	Mail,
 	ExternalLink,
 } from "lucide-react";
 import { personalInfo } from "./data/personal";
+import { services } from "./data/services";
+import { projects } from "./data/projects";
 
 const Portfolio = () => {
 	const [isMenuOpen, setIsMenuOpen] =
@@ -60,9 +62,6 @@ const Portfolio = () => {
 		);
 	};
 
-	const services = [];
-
-	const projects = [];
 
 	return (
 		<div className="min-h-screen bg-gray-50 overflow-x-hidden">
@@ -292,31 +291,31 @@ const Portfolio = () => {
 
 							<div className="flex space-x-6">
 								<a
-									href="https://github.com"
+									href={personalInfo.github}
 									target="_blank"
 									rel="noopener noreferrer"
 									className="text-gray-600 hover:text-purple-600 transition-colors"
 								>
-									<Github
+									<GitHubIcon
 										size={
 											24
 										}
 									/>
 								</a>
 								<a
-									href="https://linkedin.com"
+									href={personalInfo.linkedin}
 									target="_blank"
 									rel="noopener noreferrer"
 									className="text-gray-600 hover:text-purple-600 transition-colors"
 								>
-									<Linkedin
+									<LinkedinIcon
 										size={
 											24
 										}
 									/>
 								</a>
 								<a
-									href="mailto:hello@example.com"
+									href={`mailto:${personalInfo.email}`}
 									className="text-gray-600 hover:text-purple-600 transition-colors"
 								>
 									<Mail
@@ -360,15 +359,66 @@ const Portfolio = () => {
 
 							<div className="relative">
 								<div className="w-80 h-80 lg:w-96 lg:h-96 mx-auto bg-gradient-to-br from-purple-200 via-pink-200 to-teal-200 rounded-full overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
-									<div className="w-full h-full bg-gradient-to-br from-purple-100 to-grey-100 flex items-center justify-center">
-										<div className="text-purple-600 text-center">
-											<div className="text-8xl mb-4">
-												<img
-													src="/images/TiffanyHall.png"
-													alt="Tiffany is a joyful unicorn that loves to knit and code."
-													className="w-full h-full object-cover rounded-full transform scale-75 -translate-y-18"
-												/>
-											</div>
+									<img
+										src="/images/TiffanyHall.png"
+										alt="Tiffany is a joyful unicorn that loves to knit and code."
+										className="w-full h-full object-contain rounded-full"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section
+				id="about"
+				className="py-20 bg-white"
+			>
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+						<div className="space-y-8">
+							<div>
+								<h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+									About Me
+								</h2>
+								<div className="space-y-6 text-gray-600 text-lg leading-relaxed">
+									<p>
+										I'm a passionate Full Stack Developer with a love for creating beautiful, functional web applications. My journey in tech combines technical expertise with creative problem-solving.
+									</p>
+									<p>
+										As a Technical Product Owner and Technical Livestream Host, I bridge the gap between complex technical concepts and user-friendly solutions. I believe in writing clean, maintainable code and delivering exceptional user experiences.
+									</p>
+									<p>
+										When I'm not coding, you'll find me knitting, exploring new technologies, or sharing knowledge with the developer community through livestreams and events.
+									</p>
+								</div>
+							</div>
+							
+							<div className="flex flex-wrap gap-3">
+								{["JavaScript", "React", "Node.js", "TypeScript", "Python", "PostgreSQL", "MongoDB", "Tailwind CSS"].map((skill) => (
+									<span key={skill} className="px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full font-medium text-sm">
+										{skill}
+									</span>
+								))}
+							</div>
+						</div>
+						
+						<div className="relative">
+							<div className="bg-gradient-to-br from-purple-100 via-pink-50 to-teal-50 rounded-2xl p-8 shadow-lg">
+								<div className="text-center space-y-6">
+									<h3 className="text-2xl font-bold text-gray-900">Let's Connect!</h3>
+									<p className="text-gray-600">
+										Available for remote opportunities and exciting projects.
+									</p>
+									<div className="space-y-4">
+										<div className="flex items-center justify-center space-x-2 text-gray-700">
+											<Mail size={20} className="text-purple-600" />
+											<span className="font-medium">{personalInfo.email}</span>
+										</div>
+										<div className="flex items-center justify-center space-x-2 text-gray-700">
+											<MapPin size={20} className="text-purple-600" />
+											<span>{personalInfo.location}</span>
 										</div>
 									</div>
 								</div>
@@ -380,7 +430,7 @@ const Portfolio = () => {
 
 			<section
 				id="services"
-				className="py-20 bg-white"
+				className="py-20 bg-gray-50"
 			>
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="text-center mb-16">
@@ -474,6 +524,18 @@ const Portfolio = () => {
 											)
 										)}
 									</div>
+									{service.certification && (
+										<div className="mt-4 text-center">
+											<div className="inline-block px-4 py-2 bg-gradient-to-r from-green-100 to-blue-100 text-green-800 rounded-lg border border-green-200">
+												<div className="flex items-center justify-center space-x-2">
+													<span className="text-lg">🏆</span>
+													<span className="font-semibold text-xs">
+														{service.certification}
+													</span>
+												</div>
+											</div>
+										</div>
+									)}
 								</div>
 							)
 						)}
@@ -483,7 +545,7 @@ const Portfolio = () => {
 
 			<section
 				id="portfolio"
-				className="py-20 bg-gray-50"
+				className="py-20 bg-white"
 			>
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="text-center mb-16">
@@ -516,20 +578,30 @@ const Portfolio = () => {
 									key={
 										index
 									}
-									className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+									className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+									onClick={() => project.url && window.open(project.url, '_blank')}
 								>
 									<div
-										className={`h-48 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}
+										className={`h-48 relative overflow-hidden ${project.image ? 'bg-gray-100' : `bg-gradient-to-br ${project.gradient}`}`}
 									>
-										<div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
-										<div className="absolute bottom-4 right-4">
-											<ExternalLink
-												className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-												size={
-													20
-												}
+										{project.image ? (
+											<img 
+												src={project.image} 
+												alt={project.title}
+												className="w-full h-full object-cover"
 											/>
-										</div>
+										) : null}
+										<div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+										{project.url && (
+											<div className="absolute bottom-4 right-4">
+												<ExternalLink
+													className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+													size={
+														20
+													}
+												/>
+											</div>
+										)}
 									</div>
 									<div className="p-6">
 										<h3 className="font-bold text-xl text-gray-900 mb-3">
@@ -638,7 +710,7 @@ const Portfolio = () => {
 								rel="noopener noreferrer"
 								className="p-3 bg-white/10 rounded-full text-purple-300 hover:text-white hover:bg-white/20 transition-all duration-300"
 							>
-								<Github
+								<GitHubIcon
 									size={
 										24
 									}
@@ -652,16 +724,14 @@ const Portfolio = () => {
 								rel="noopener noreferrer"
 								className="p-3 bg-white/10 rounded-full text-purple-300 hover:text-white hover:bg-white/20 transition-all duration-300"
 							>
-								<Linkedin
+								<LinkedinIcon
 									size={
 										24
 									}
 								/>
 							</a>
 							<a
-								href={
-									personalInfo.email
-								}
+								href={`mailto:${personalInfo.email}`}
 								className="p-3 bg-white/10 rounded-full text-purple-300 hover:text-white hover:bg-white/20 transition-all duration-300"
 							>
 								<Mail

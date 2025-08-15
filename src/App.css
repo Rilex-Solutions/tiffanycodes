@@ -111,7 +111,8 @@
 
 /* === FOOTER === */
 .footer {
-  @apply bg-gradient-to-r from-purple-900 via-pink-900 to-teal-900 text-white py-16;
+  background: linear-gradient(to right, #831843, #581c87, #14b8a6);
+  @apply text-white py-16;
 }
 
 .footer-title {

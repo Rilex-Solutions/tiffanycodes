@@ -52,6 +52,8 @@ const App = () => {
                 <h1 className="hero-title">
                   Full Stack Developer
                   <br />
+                  Technical Product Owner
+                  <br />
                   <span className="gradient-text-purple">Building Digital</span>
                   <br />
                   <span className="gradient-text-teal">Experiences</span>
@@ -136,10 +138,18 @@ const App = () => {
                 </div>
               </header>
               
-              <section className="skills-container" aria-label="Core Technologies">
-                {["JavaScript", "React", "Node.js", "TypeScript", "Python", "PostgreSQL", "MongoDB", "Tailwind CSS"]
-                  .map((skill) => (
-                    <span key={skill} className="skill-tag">{skill}</span>
+              <section className="skills-container" aria-label="Key Achievements">
+                {[
+                  "AWS Cloud Practitioner Certified",
+                  "Professional Scrum Master I", 
+                  "40+ Live Coding Showcases Hosted",
+                  "Literacy Platforms Serving Thousands",
+                  "2,100+ Monthly Visitors Generated",
+                  "Full-Stack Custom E-commerce Solutions",
+                  "CI/CD Pipelines & Microservices",
+                  "15+ Years Educational Leadership"
+                ].map((achievement) => (
+                    <span key={achievement} className="skill-tag">{achievement}</span>
                   ))
                 }
               </section>

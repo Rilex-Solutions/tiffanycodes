@@ -39,11 +39,13 @@ export const projects = [
 		tech: [
 			"React",
 			"Tailwind CSS",
+			"Parallax Scrolling",
 			"Responsive Design",
 			"Corporate Branding",
 			"Modern UI/UX",
 		],
 		gradient: "from-pink-500 to-purple-500",
+		image: "/images/rilex.png",
 		url: "https://rilexsolutions.com",
 	},
 ];

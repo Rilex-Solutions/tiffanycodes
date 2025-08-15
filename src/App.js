@@ -214,10 +214,8 @@ const App = () => {
       <footer id="contact" className="footer">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <header className="text-center mb-12">
-            <h2 className="footer-title">I'm awesome! You're awesome! Let's be awesome together!</h2>
-            <p className="footer-description">
-              Ready to bring your ideas to life? Let's discuss your next project!
-            </p>
+            <h2 className="footer-title">I'm awesome! You're awesome!</h2>
+            <h2 className="footer-title"> Let's be awesome together!</h2>
           </header>
 
           <div className="flex flex-col md:flex-row justify-between items-center mb-12">

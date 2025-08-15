@@ -8,12 +8,23 @@ const ProjectCard = ({ project }) => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleCardClick();
+    }
+  };
+
   return (
     <div
       className={`group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 ${
         project.url ? 'cursor-pointer' : ''
       }`}
       onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={project.url ? 0 : -1}
+      role={project.url ? "button" : undefined}
+      aria-label={project.url ? `View ${project.title} project (opens in new tab)` : undefined}
     >
       {/* Image/Gradient Header */}
       <div className={`h-48 relative overflow-hidden ${

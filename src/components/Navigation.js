@@ -42,7 +42,7 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
           <div className="hidden md:block">
             <button
               onClick={() => scrollToSection("contact")}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="bg-gradient-to-r from-purple-700 to-pink-700 text-white px-6 py-2 rounded-full hover:from-purple-800 hover:to-pink-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Let's Connect
             </button>
@@ -52,6 +52,9 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
           <button
             onClick={toggleMenu}
             className="md:hidden text-gray-700 p-2"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label="Toggle navigation menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -60,7 +63,10 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100">
+        <div 
+          id="mobile-menu"
+          className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100"
+        >
           <div className="px-4 py-3 space-y-3">
             {navItems.map((item) => (
               <button
@@ -73,7 +79,7 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
             ))}
             <button
               onClick={() => scrollToSection("contact")}
-              className="w-full mt-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300"
+              className="w-full mt-3 bg-gradient-to-r from-purple-700 to-pink-700 text-white px-6 py-2 rounded-full hover:from-purple-800 hover:to-pink-800 transition-all duration-300"
             >
               Let's Connect
             </button>

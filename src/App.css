@@ -33,29 +33,33 @@
 }
 
 .gradient-text-purple {
-  background: linear-gradient(to right, #9333ea, #ec4899);
+  background: linear-gradient(to right, #7c3aed, #be185d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Fallback for accessibility */
+  color: #7c3aed;
 }
 
 .gradient-text-teal {
-  background: linear-gradient(to right, #14b8a6, #9333ea);
+  background: linear-gradient(to right, #0f766e, #7c3aed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Fallback for accessibility */
+  color: #0f766e;
 }
 
 /* === BUTTONS === */
 .btn-primary {
-  @apply bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full 
-         hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg 
+  @apply bg-gradient-to-r from-purple-700 to-pink-700 text-white px-8 py-4 rounded-full 
+         hover:from-purple-800 hover:to-pink-800 transition-all duration-300 shadow-lg 
          hover:shadow-xl transform hover:scale-105 flex items-center justify-center;
 }
 
 .btn-secondary {
-  @apply bg-gradient-to-r from-teal-500 to-purple-500 text-white px-8 py-4 rounded-full 
-         hover:from-teal-600 hover:to-purple-600 transition-all duration-300 shadow-lg 
+  @apply bg-gradient-to-r from-teal-600 to-purple-600 text-white px-8 py-4 rounded-full 
+         hover:from-teal-700 hover:to-purple-700 transition-all duration-300 shadow-lg 
          hover:shadow-xl transform hover:scale-105;
 }
 
@@ -126,6 +130,46 @@
 .footer-social {
   @apply p-3 bg-white/10 rounded-full text-purple-300 hover:text-white 
          hover:bg-white/20 transition-all duration-300;
+}
+
+/* === ACCESSIBILITY === */
+/* Focus styles for keyboard navigation */
+button:focus,
+[role="button"]:focus,
+a:focus {
+  outline: 2px solid #7c3aed;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.social-link:focus,
+.footer-social:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* Ensure focus is visible on interactive elements */
+.cursor-pointer:focus {
+  outline: 2px solid #7c3aed;
+  outline-offset: 2px;
+}
+
+/* === WCAG COMPLIANCE BADGE === */
+.wcag-compliance-badge {
+  @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1;
+}
+
+.accessibility-icon {
+  @apply text-green-400 flex-shrink-0;
+}
+
+.wcag-badge-small {
+  @apply text-white font-bold text-xs uppercase tracking-wider;
+}
+
+.wcag-compliant-small {
+  @apply text-green-400 font-semibold text-xs;
 }
 
 /* === RESPONSIVE UTILITIES === */

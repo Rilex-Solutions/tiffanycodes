@@ -81,14 +81,14 @@ const App = () => {
                 </button>
               </nav>
 
-              <ul className="flex space-x-6" role="list">
+              <ul className="flex space-x-6">
                 <li>
-                  <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub Profile">
+                  <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub Profile (opens in new tab)">
                     <Github size={24} />
                   </a>
                 </li>
                 <li>
-                  <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn Profile">
+                  <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn Profile (opens in new tab)">
                     <Linkedin size={24} />
                   </a>
                 </li>
@@ -190,7 +190,7 @@ const App = () => {
             </p>
           </header>
 
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" role="list">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
               <li key={index}>
                 <ServiceCard service={service} />
@@ -210,7 +210,7 @@ const App = () => {
             </p>
           </header>
 
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="list">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <li key={index}>
                 <ProjectCard project={project} />
@@ -240,14 +240,14 @@ const App = () => {
             </div>
 
             <nav aria-label="Social Media Links">
-              <ul className="flex space-x-6" role="list">
+              <ul className="flex space-x-6">
                 <li>
-                  <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="footer-social" aria-label="GitHub Profile">
+                  <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="footer-social" aria-label="GitHub Profile (opens in new tab)">
                     <Github size={24} />
                   </a>
                 </li>
                 <li>
-                  <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="footer-social" aria-label="LinkedIn Profile">
+                  <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="footer-social" aria-label="LinkedIn Profile (opens in new tab)">
                     <Linkedin size={24} />
                   </a>
                 </li>
@@ -266,10 +266,31 @@ const App = () => {
             </p>
           </div>
 
-          <div className="border-t border-purple-800 pt-8 text-center">
-            <small className="text-purple-200 text-sm">
-              © 2025 TiffanyCodes
-            </small>
+          <div className="border-t border-purple-800 pt-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+              {/* Copyright */}
+              <small className="text-purple-200 text-sm">
+                © 2025 TiffanyCodes
+              </small>
+              
+              {/* WCAG Compliance Badge */}
+              <div className="wcag-compliance-badge">
+                <div className="flex items-center space-x-2">
+                  <div className="accessibility-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                      <circle cx="12" cy="6" r="1" fill="currentColor"/>
+                      <path d="M8 14l4-4 4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M8 18h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <span className="wcag-badge-small">WCAG 2.0 AA</span>
+                    <span className="wcag-compliant-small">Compliant</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

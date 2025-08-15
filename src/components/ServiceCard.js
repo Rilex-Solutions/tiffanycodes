@@ -22,9 +22,9 @@ const ServiceCard = ({ service }) => {
   const colors = getColorClasses(service.color);
 
   return (
-    <div className="group p-8 rounded-2xl border border-gray-100 hover:border-purple-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white">
+    <div className="p-8 rounded-2xl border border-gray-100 bg-white">
       {/* Icon */}
-      <div className={`w-14 h-14 bg-gradient-to-r ${colors.bg} rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+      <div className={`w-14 h-14 bg-gradient-to-r ${colors.bg} rounded-xl flex items-center justify-center mx-auto mb-6`}>
         <service.icon className={colors.text} size={24} />
       </div>
 

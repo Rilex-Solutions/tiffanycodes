@@ -118,7 +118,7 @@ const App = () => {
       {/* About Section */}
       <section id="about" className="section-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-12">
             <article className="space-y-8">
               <header>
                 <h2 className="section-title">About Me</h2>
@@ -137,22 +137,6 @@ const App = () => {
                   </p>
                 </div>
               </header>
-              
-              <section className="skills-container" aria-label="Key Achievements">
-                {[
-                  "AWS Cloud Practitioner Certified",
-                  "Professional Scrum Master I", 
-                  "40+ Live Coding Showcases Hosted",
-                  "Literacy Platforms Serving Thousands",
-                  "2,100+ Monthly Visitors Generated",
-                  "Full-Stack Custom E-commerce Solutions",
-                  "CI/CD Pipelines & Microservices",
-                  "15+ Years Educational Leadership"
-                ].map((achievement) => (
-                    <span key={achievement} className="skill-tag">{achievement}</span>
-                  ))
-                }
-              </section>
             </article>
             
             <aside className="relative">
@@ -176,6 +160,22 @@ const App = () => {
               </div>
             </aside>
           </div>
+          
+          <section className="skills-container" aria-label="Key Achievements">
+            {[
+              "AWS Cloud Practitioner Certified",
+              "Professional Scrum Master I", 
+              "40+ Live Coding Showcases Hosted",
+              "Literacy Platforms Serving Thousands",
+              "2,100+ Monthly Visitors Generated",
+              "Full-Stack Custom E-commerce Solutions",
+              "CI/CD Pipelines & Microservices",
+              "15+ Years Educational Leadership"
+            ].map((achievement) => (
+                <span key={achievement} className="skill-tag">{achievement}</span>
+              ))
+            }
+          </section>
         </div>
       </section>
 

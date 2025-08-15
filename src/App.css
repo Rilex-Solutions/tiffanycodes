@@ -93,7 +93,7 @@
 
 /* === SKILLS & CONTACT === */
 .skills-container {
-  @apply flex flex-wrap gap-3;
+  @apply flex flex-wrap gap-3 justify-between;
 }
 
 .skill-tag {

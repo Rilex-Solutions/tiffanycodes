@@ -122,18 +122,16 @@ const App = () => {
                 <h2 className="section-title">About Me</h2>
                 <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                   <p>
-                    I'm a passionate Full Stack Developer with a love for creating beautiful, 
-                    functional web applications. My journey in tech combines technical expertise 
-                    with creative problem-solving.
+                    Hey there! I'm Tiffany – the Full Stack Developer who brings 15+ years of educational leadership superpowers to every project I touch.
                   </p>
                   <p>
-                    As a Technical Product Owner and Technical Livestream Host, I bridge the gap 
-                    between complex technical concepts and user-friendly solutions. I believe in 
-                    writing clean, maintainable code and delivering exceptional user experiences.
+                    Think of me as your technical translator: I take complex problems, sprinkle in some creative magic, and deliver solutions that make users go "wow, this actually makes sense!" From architecting literacy platforms serving thousands of students nationwide to hosting 40+ live coding showcases, I'm equally at home debugging Ruby on Rails backends and cheering on bootcamp students as they tackle their first algorithms.
                   </p>
                   <p>
-                    When I'm not coding, you'll find me knitting, exploring new technologies, 
-                    or sharing knowledge with the developer community through livestreams and events.
+                    I've spent years in special education classrooms, which means I'm practically a wizard at making technology accessible, intuitive, and genuinely helpful. I don't just write code – I craft experiences that work for everyone, including the users most other developers forget about.
+                  </p>
+                  <p>
+                    Currently available for exciting new opportunities while continuing as a Technical Livestream Host and building custom websites and applications for clients, because why choose one passion when you can excel at multiple? I'm the person who gets genuinely excited about sprint planning, celebrates every successful deployment, and believes that the best technology is the kind that feels like it was built just for you.
                   </p>
                 </div>
               </header>
@@ -216,9 +214,9 @@ const App = () => {
       <footer id="contact" className="footer">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <header className="text-center mb-12">
-            <h2 className="footer-title">Let's Build Something Amazing</h2>
+            <h2 className="footer-title">I'm awesome! You're awesome! Let's be awesome together!</h2>
             <p className="footer-description">
-              Ready to bring your ideas to life? Let's discuss your next project.
+              Ready to bring your ideas to life? Let's discuss your next project!
             </p>
           </header>
 
@@ -262,7 +260,7 @@ const App = () => {
 
           <div className="border-t border-purple-800 pt-8 text-center">
             <small className="text-purple-200 text-sm">
-              © 2025 Tiffany Hall. Crafted with React & Tailwind CSS.
+              © 2025 TiffanyCodes
             </small>
           </div>
         </div>

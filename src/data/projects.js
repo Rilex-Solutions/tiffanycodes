@@ -34,14 +34,16 @@ export const projects = [
 		url: "https://www.huberduberkidresincreations.com",
 	},
 	{
-		title: "Analytics Dashboard",
-		description: "Real-time data visualization dashboard with custom charts",
+		title: "Rilex Solutions - Corporate Landing Page",
+		description: "Professional corporate landing page for a parent company managing multiple business solutions and subsidiaries",
 		tech: [
 			"React",
-			"D3.js",
-			"Express",
-			"MongoDB",
+			"Tailwind CSS",
+			"Responsive Design",
+			"Corporate Branding",
+			"Modern UI/UX",
 		],
 		gradient: "from-pink-500 to-purple-500",
+		url: "https://rilexsolutions.com",
 	},
 ];

@@ -1,36 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { MapPin, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
+// Components
 import Navigation from "./components/Navigation";
 import ServiceCard from "./components/ServiceCard";
 import ProjectCard from "./components/ProjectCard";
+import ErrorBoundary from "./components/ErrorBoundary";
+
+// Data
 import { personalInfo } from "./data/personal";
 import { services } from "./data/services";
 import { projects } from "./data/projects";
+
+// Constants
+import { SCROLL_THRESHOLD } from "./constants";
+
+// Styles
 import "./App.css";
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Handle scroll events for navbar styling
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
     };
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  // Toggle mobile menu
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
 
-  const scrollToSection = (sectionId) => {
+  // Smooth scroll to section
+  const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: "smooth" });
-    setIsMenuOpen(false);
-  };
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false);
+    }
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
+    <ErrorBoundary>
+      <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <Navigation 
         isMenuOpen={isMenuOpen}
         toggleMenu={toggleMenu}
@@ -294,7 +312,8 @@ const App = () => {
           </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 };
 

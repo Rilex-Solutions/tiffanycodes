@@ -1,8 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Menu, X } from "lucide-react";
+import { NAV_ITEMS } from "../constants";
 
+/**
+ * Navigation component with responsive design and smooth scrolling
+ * @param {Object} props - Component props
+ * @param {boolean} props.isMenuOpen - Mobile menu open state
+ * @param {Function} props.toggleMenu - Function to toggle mobile menu
+ * @param {Function} props.scrollToSection - Function to scroll to section
+ * @param {boolean} props.isScrolled - Whether page has been scrolled
+ * @returns {JSX.Element} Navigation component
+ */
 const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => {
-  const navItems = ["services", "portfolio", "about", "contact"];
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -27,7 +37,7 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
+            {NAV_ITEMS.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -68,7 +78,7 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
           className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100"
         >
           <div className="px-4 py-3 space-y-3">
-            {navItems.map((item) => (
+            {NAV_ITEMS.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -90,4 +100,11 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
   );
 };
 
-export default Navigation;
+Navigation.propTypes = {
+  isMenuOpen: PropTypes.bool.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
+  scrollToSection: PropTypes.func.isRequired,
+  isScrolled: PropTypes.bool.isRequired,
+};
+
+export default React.memo(Navigation);

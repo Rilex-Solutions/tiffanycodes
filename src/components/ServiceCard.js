@@ -1,5 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 
+/**
+ * ServiceCard component displays service information with icon and tech stack
+ * @param {Object} props - Component props
+ * @param {Object} props.service - Service data object
+ * @param {React.Component} props.service.icon - Icon component
+ * @param {string} props.service.title - Service title
+ * @param {string} props.service.description - Service description
+ * @param {string} props.service.color - Color theme for the card
+ * @param {Array<string>} props.service.technologies - Array of technologies
+ * @param {string} [props.service.certification] - Optional certification badge
+ * @returns {JSX.Element} ServiceCard component
+ */
 const ServiceCard = ({ service }) => {
   const getColorClasses = (color) => {
     const colorMap = {
@@ -65,4 +78,15 @@ const ServiceCard = ({ service }) => {
   );
 };
 
-export default ServiceCard;
+ServiceCard.propTypes = {
+  service: PropTypes.shape({
+    icon: PropTypes.elementType.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+    technologies: PropTypes.arrayOf(PropTypes.string).isRequired,
+    certification: PropTypes.string,
+  }).isRequired,
+};
+
+export default React.memo(ServiceCard);

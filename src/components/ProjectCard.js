@@ -1,6 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ExternalLink } from "lucide-react";
 
+/**
+ * ProjectCard component displays project information with optional clickable functionality
+ * @param {Object} props - Component props
+ * @param {Object} props.project - Project data object
+ * @param {string} props.project.title - Project title
+ * @param {string} props.project.description - Project description
+ * @param {Array<string>} props.project.tech - Array of technologies used
+ * @param {string} [props.project.image] - Optional project image URL
+ * @param {string} [props.project.url] - Optional project URL
+ * @param {string} [props.project.gradient] - Optional gradient for card header
+ * @returns {JSX.Element} ProjectCard component
+ */
 const ProjectCard = ({ project }) => {
   const handleCardClick = () => {
     if (project.url) {
@@ -73,4 +86,16 @@ const ProjectCard = ({ project }) => {
   );
 };
 
-export default ProjectCard;
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    tech: PropTypes.arrayOf(PropTypes.string).isRequired,
+    image: PropTypes.string,
+    url: PropTypes.string,
+    gradient: PropTypes.string,
+    metrics: PropTypes.string,
+  }).isRequired,
+};
+
+export default React.memo(ProjectCard);

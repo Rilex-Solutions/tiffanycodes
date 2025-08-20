@@ -5,12 +5,14 @@ import { MapPin, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import Navigation from "./components/Navigation";
 import ServiceCard from "./components/ServiceCard";
 import ProjectCard from "./components/ProjectCard";
+import ResumeCard from "./components/ResumeCard";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 // Data
 import { personalInfo } from "./data/personal";
 import { services } from "./data/services";
 import { projects } from "./data/projects";
+import { resumes, resumeSection } from "./data/resumes";
 
 // Constants
 import { SCROLL_THRESHOLD } from "./constants";
@@ -197,8 +199,37 @@ const App = () => {
         </div>
       </section>
 
+      {/* Resume Section */}
+      <section id="resume" className="section-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <header className="text-center mb-16">
+            <h2 className="section-title">{resumeSection.title} ✨</h2>
+            <p className="section-description">
+              {resumeSection.subtitle}
+            </p>
+          </header>
+
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {resumes.map((resume, index) => (
+              <li key={index}>
+                <ResumeCard resume={resume} />
+              </li>
+            ))}
+          </ul>
+
+          <footer className="text-center">
+            <p className="text-gray-600 text-sm">
+              {resumeSection.microCopy}
+            </p>
+            <p className="text-gray-500 text-xs mt-2">
+              All versions available in PDF format • Updated August 2025
+            </p>
+          </footer>
+        </div>
+      </section>
+
       {/* Services Section */}
-      <section id="services" className="section-gray">
+      <section id="services" className="section-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <header className="text-center mb-16">
             <h2 className="section-title">What I Do</h2>
@@ -219,7 +250,7 @@ const App = () => {
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="section-white">
+      <section id="portfolio" className="section-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <header className="text-center mb-16">
             <h2 className="section-title">Featured Projects</h2>

@@ -3,7 +3,7 @@
  */
 
 // Navigation items in order
-export const NAV_ITEMS = ["services", "portfolio", "about", "contact"];
+export const NAV_ITEMS = ["services", "resume", "portfolio", "about", "contact"];
 
 // Scroll threshold for navbar background change
 export const SCROLL_THRESHOLD = 50;

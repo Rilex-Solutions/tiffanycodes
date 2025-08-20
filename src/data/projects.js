@@ -64,7 +64,7 @@ export const projects = [
 	},
 	{
 		title: "Featured Technical Spokesperson",
-		description: "Selected as featured developer in promotional campaign highlighting coding education and career transformation stories. Showcased technical expertise and journey in professional commercial production.",
+		description: "Selected as featured developer in promotional campaign highlighting coding education and career transformation stories. Showcased technical expertise and journey in professional commercial production. Since filming, I've led the technical teams launching Scholastic's flagship education platform and am now available for consulting engagements.",
 		tech: [
 			"Public Speaking",
 			"Technical Communication",

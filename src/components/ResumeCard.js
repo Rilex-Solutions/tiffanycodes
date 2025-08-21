@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Download, Eye } from "lucide-react";
 
@@ -39,12 +40,6 @@ const ResumeCard = ({ resume }) => {
 
   const colors = getColorClasses(resume.color);
 
-  const handleView = () => {
-    if (resume.viewUrl) {
-      window.open(resume.viewUrl, '_blank');
-    }
-  };
-
   const handleDownload = () => {
     if (resume.downloadUrl) {
       const link = document.createElement('a');
@@ -74,14 +69,14 @@ const ResumeCard = ({ resume }) => {
         
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3">
-          <button
-            onClick={handleView}
-            className={`bg-gradient-to-r ${colors.button} text-white px-4 py-2 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center group`}
-            aria-label={`View ${resume.title} resume (opens in new tab)`}
+          <Link
+            to={resume.viewUrl}
+            className={`bg-gradient-to-r ${colors.button} text-white px-4 py-2 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center group text-center text-decoration-none`}
+            aria-label={`View ${resume.title} resume`}
           >
             <Eye size={16} className="mr-2" />
             View Resume
-          </button>
+          </Link>
           <button
             onClick={handleDownload}
             className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center"

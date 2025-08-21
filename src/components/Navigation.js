@@ -50,12 +50,12 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="bg-gradient-to-r from-purple-700 to-pink-700 text-white px-6 py-2 rounded-full hover:from-purple-800 hover:to-pink-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+            <a
+              href="mailto:tiffanycodes.co@gmail.com?subject=Let's be awesome together, Tiffany!"
+              className="bg-gradient-to-r from-purple-700 to-pink-700 text-white px-6 py-2 rounded-full hover:from-purple-800 hover:to-pink-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block text-decoration-none"
             >
               Let's Connect
-            </button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -87,12 +87,12 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
                 {item}
               </button>
             ))}
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="w-full mt-3 bg-gradient-to-r from-purple-700 to-pink-700 text-white px-6 py-2 rounded-full hover:from-purple-800 hover:to-pink-800 transition-all duration-300"
+            <a
+              href="mailto:tiffanycodes.co@gmail.com?subject=Let's be awesome together, Tiffany!"
+              className="w-full mt-3 bg-gradient-to-r from-purple-700 to-pink-700 text-white px-6 py-2 rounded-full hover:from-purple-800 hover:to-pink-800 transition-all duration-300 inline-block text-center text-decoration-none"
             >
               Let's Connect
-            </button>
+            </a>
           </div>
         </div>
       )}

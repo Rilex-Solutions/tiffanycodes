@@ -1,70 +1,199 @@
-# Getting Started with Create React App
+# TiffanyCodes Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive portfolio website built with React showcasing Technical Product Owner, Full-Stack Developer, and EdTech Consultant expertise.
 
-## Available Scripts
+## 🚀 Quick Start
 
-In the project directory, you can run:
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
 
-### `npm start`
+### Local Development
+```bash
+# Clone the repository
+git clone https://github.com/Rilex-Solutions/tiffanycodes.git
+cd tiffanycodes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Install dependencies
+npm install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Start development server (runs on ports 3000/3001)
+npm start
+```
 
-### `npm test`
+**Important**: If you encounter port conflicts, kill existing processes:
+```bash
+lsof -ti:3000 | xargs kill -9
+lsof -ti:3001 | xargs kill -9
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🌐 Hosting & Deployment
 
-### `npm run build`
+### Current Setup
+- **Domain**: tiffanycodes.com
+- **Hosting**: GitHub Pages
+- **Repository**: https://github.com/Rilex-Solutions/tiffanycodes.git
+- **Branch**: main
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Deploy to Production
+```bash
+# Build and deploy to GitHub Pages
+npm run deploy
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This runs:
+1. `npm run build` (creates optimized production build)
+2. `gh-pages -d build` (deploys to gh-pages branch)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Domain Configuration
+- CNAME file in `/public/CNAME` contains: `tiffanycodes.com`
+- GitHub Pages automatically serves from the `gh-pages` branch
+- Custom domain is configured in GitHub repository settings
 
-### `npm run eject`
+## 📁 Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+tiffanycodes/
+├── public/
+│   ├── CNAME                    # Domain configuration
+│   ├── images/                  # Profile and project images
+│   ├── pdfs/                   # Resume PDFs (3 versions)
+│   └── pdf.worker.min.js       # Local PDF.js worker (CORS fix)
+├── src/
+│   ├── components/
+│   │   ├── Portfolio.js        # Main portfolio component
+│   │   ├── ResumeViewer.js     # PDF resume viewer
+│   │   ├── Navigation.js       # Site navigation
+│   │   ├── ProjectCard.js      # Project showcase cards
+│   │   ├── ServiceCard.js      # Services display cards
+│   │   ├── ResumeCard.js       # Resume download cards
+│   │   └── RotatingTitles.js   # Hero section animated titles
+│   ├── data/
+│   │   ├── personal.js         # Personal info & contact
+│   │   ├── services.js         # 3-column services data
+│   │   ├── projects.js         # Portfolio projects
+│   │   └── resumes.js          # Resume configurations
+│   └── App.css                 # Global styles (Tailwind + custom)
+└── package.json
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🎨 Key Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Three Focus Areas
+The site is organized around three career focus areas:
+1. **Technical Product Owner** (Purple theme)
+2. **Full-Stack Developer** (Teal theme)  
+3. **EdTech Consultant** (Pink theme)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Resume System
+- Three tailored PDF versions in `/public/pdfs/`
+- Custom resume viewer at `/resume/{type}` routes
+- Download functionality for each version
+- Mobile-optimized PDF display
 
-## Learn More
+### Responsive Design
+- Mobile-first approach with Tailwind CSS
+- Custom breakpoints and responsive PDF viewer
+- Optimized button layouts and navigation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔧 Technical Quirks & Configuration
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### PDF Viewer (react-pdf)
+```javascript
+// IMPORTANT: Uses local worker to avoid CDN/CORS issues
+pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
+```
+- Worker file located in `/public/pdf.worker.min.js`
+- Mobile responsive with conditional width/scale handling
+- Window width tracking for optimal display
 
-### Code Splitting
+### Resume Viewer Mobile Fix
+- Screens ≥1000px: Normal scale-based rendering
+- Screens <1000px: Width-constrained rendering (`windowWidth - 32`)
+- Eliminates mobile overflow while maintaining quality
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Button Styling Mobile Fix
+```css
+.btn-primary, .btn-secondary {
+  /* Mobile: centered, fit-content width */
+  @apply w-fit mx-auto sm:mx-0;
+}
+```
 
-### Analyzing the Bundle Size
+### Services Data Structure
+Located in `/src/data/services.js` - matches resume focus areas:
+- Technical Product Owner → Purple
+- Full-Stack Developer → Teal  
+- EdTech Consultant → Pink
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🛠 Development Commands
 
-### Making a Progressive Web App
+```bash
+# Development
+npm start                # Start dev server
+npm test                # Run tests  
+npm run build           # Create production build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# Deployment  
+npm run deploy          # Build and deploy to GitHub Pages
 
-### Advanced Configuration
+# Linting (if configured)
+npm run lint            # Code linting
+npm run lint:fix        # Auto-fix linting issues
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🎯 Content Management
 
-### Deployment
+### Updating Personal Information
+Edit `/src/data/personal.js`:
+```javascript
+export const personalInfo = {
+  email: "tiffanycodes.co@gmail.com",
+  location: "Remote",
+  github: "https://github.com/tHALL3000",
+  linkedin: "https://linkedin.com/in/tiffany-hall-codes"
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Adding New Projects
+Edit `/src/data/projects.js` - each project needs:
+- title, description, technologies
+- image (in `/public/images/`)
+- links (demo, github)
+- color theme
 
-### `npm run build` fails to minify
+### Updating Services/Skills
+Edit `/src/data/services.js` - maintain the three-column structure matching resume focus areas.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Resume Updates
+1. Replace PDFs in `/public/pdfs/`
+2. Update metadata in `/src/data/resumes.js`
+3. Ensure filenames match between both locations
+
+## 🚨 Common Issues
+
+### Port Conflicts
+Development server may conflict with other React apps. Always kill processes on 3000/3001 before starting.
+
+### PDF Worker CORS
+The local `pdf.worker.min.js` file prevents CDN/CORS issues. Don't remove or relocate it.
+
+### Mobile PDF Overflow
+The responsive PDF viewer uses conditional rendering. Test on actual mobile devices, not just browser dev tools.
+
+### GitHub Pages Deployment
+- Ensure `homepage` in `package.json` matches your domain
+- CNAME file must contain your custom domain
+- Deploy creates a separate `gh-pages` branch
+
+## 📞 Contact & Support
+
+- **Email**: tiffanycodes.co@gmail.com
+- **GitHub**: https://github.com/tHALL3000
+- **Live Site**: https://tiffanycodes.com
+
+---
+
+**Last Updated**: August 2025  
+**Node Version**: v16+  
+**React Version**: 19.1.0

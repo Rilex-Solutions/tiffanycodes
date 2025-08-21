@@ -284,7 +284,7 @@ const Portfolio = () => {
                 <span className="text-2xl font-bold">Tiffany Hall</span>
               </div>
               <p className="text-purple-200 mb-4">
-                Full Stack Developer, Technical Product Owner, & Technical Livestream and Event Host
+                Technical Product Owner, Full-Stack Developer, & EdTech Consultant
               </p>
               <address className="text-purple-300 text-sm not-italic">{personalInfo.email}</address>
             </div>

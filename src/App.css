@@ -54,13 +54,13 @@
 .btn-primary {
   @apply bg-gradient-to-r from-purple-700 to-pink-700 text-white px-8 py-4 rounded-full 
          hover:from-purple-800 hover:to-pink-800 transition-all duration-300 shadow-lg 
-         hover:shadow-xl transform hover:scale-105 flex items-center justify-center;
+         hover:shadow-xl transform hover:scale-105 flex items-center justify-center w-fit mx-auto sm:mx-0;
 }
 
 .btn-secondary {
   @apply bg-gradient-to-r from-teal-600 to-purple-600 text-white px-8 py-4 rounded-full 
          hover:from-teal-700 hover:to-purple-700 transition-all duration-300 shadow-lg 
-         hover:shadow-xl transform hover:scale-105;
+         hover:shadow-xl transform hover:scale-105 w-fit mx-auto sm:mx-0;
 }
 
 .social-link {

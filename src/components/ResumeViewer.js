@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { 
@@ -24,9 +24,23 @@ const ResumeViewer = () => {
   // State management
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [scale, setScale] = useState(1.2);
+  const [scale, setScale] = useState(() => {
+    // Set initial scale based on screen size
+    return window.innerWidth < 768 ? 0.8 : 1.2;
+  });
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Memoized resume configuration
   const resumeConfig = useMemo(() => {
@@ -166,7 +180,7 @@ const ResumeViewer = () => {
       </header>
 
       {/* PDF Viewer */}
-      <main className="flex-1 flex flex-col items-center py-8">
+      <main className="flex-1 flex flex-col items-center py-8 px-4">
         {isLoading && (
           <div className="flex items-center justify-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
@@ -187,21 +201,33 @@ const ResumeViewer = () => {
         )}
 
         {!error && (
-          <div className="bg-white rounded-lg shadow-xl overflow-hidden">
-            <Document
-              file={resumeConfig.pdfPath}
-              onLoadSuccess={onDocumentLoadSuccess}
-              onLoadError={onDocumentLoadError}
-              loading=""
-            >
-              <Page
-                pageNumber={pageNumber}
-                scale={scale}
-                className="max-w-full"
-                renderTextLayer={false}
-                renderAnnotationLayer={false}
-              />
-            </Document>
+          <div className="bg-white rounded-lg shadow-xl overflow-x-auto" 
+               style={{
+                 width: windowWidth >= 1000 ? 'auto' : '100%',
+                 maxWidth: windowWidth >= 1000 ? '1000px' : 'none',
+                 margin: windowWidth >= 1000 ? '0 auto' : '0'
+               }}>
+            <div className="flex justify-center">
+              <Document
+                file={resumeConfig.pdfPath}
+                onLoadSuccess={onDocumentLoadSuccess}
+                onLoadError={onDocumentLoadError}
+                loading=""
+              >
+                <Page
+                  pageNumber={pageNumber}
+                  scale={windowWidth >= 1000 ? scale : undefined}
+                  width={windowWidth < 1000 ? windowWidth - 32 : undefined}
+                  className="block"
+                  renderTextLayer={false}
+                  renderAnnotationLayer={false}
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto'
+                  }}
+                />
+              </Document>
+            </div>
           </div>
         )}
 

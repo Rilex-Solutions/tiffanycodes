@@ -69,7 +69,7 @@ const Portfolio = () => {
 
               <header className="space-y-6">
                 <h1 className="hero-title">
-                  <RotatingTitles />
+                  <RotatingTitles animationDuration={9} />
                   <br />
                   <span className="gradient-text-purple">Building Digital</span>
                   <br />
@@ -135,7 +135,7 @@ const Portfolio = () => {
       {/* About Section */}
       <section id="about" className="section-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <article className="space-y-8">
               <header>
                 <h2 className="section-title">About Me</h2>
@@ -156,7 +156,27 @@ const Portfolio = () => {
               </header>
             </article>
             
-            <aside className="relative">
+            <aside className="relative flex flex-col justify-center">
+              {/* Skills Section - Moved above contact */}
+              <section className="mb-8" aria-label="Key Achievements">
+                <div className="flex flex-wrap gap-4 justify-center">
+                  {[
+                    "AWS Cloud Practitioner Certified",
+                    "Professional Scrum Master I", 
+                    "40+ Live Coding Showcases Hosted",
+                    "Literacy Platforms Serving Thousands",
+                    "2,100+ Monthly Visitors Generated",
+                    "Full-Stack Custom E-commerce Solutions",
+                    "CI/CD Pipelines & Microservices",
+                    "15+ Years Educational Leadership"
+                  ].map((achievement) => (
+                      <span key={achievement} className="skill-tag">{achievement}</span>
+                    ))
+                  }
+                </div>
+              </section>
+
+              {/* Contact Card - Moved below skills */}
               <div className="contact-card">
                 <header className="text-center space-y-6">
                   <h3 className="text-2xl font-bold text-gray-900">Let's Connect!</h3>
@@ -177,22 +197,6 @@ const Portfolio = () => {
               </div>
             </aside>
           </div>
-          
-          <section className="skills-container" aria-label="Key Achievements">
-            {[
-              "AWS Cloud Practitioner Certified",
-              "Professional Scrum Master I", 
-              "40+ Live Coding Showcases Hosted",
-              "Literacy Platforms Serving Thousands",
-              "2,100+ Monthly Visitors Generated",
-              "Full-Stack Custom E-commerce Solutions",
-              "CI/CD Pipelines & Microservices",
-              "15+ Years Educational Leadership"
-            ].map((achievement) => (
-                <span key={achievement} className="skill-tag">{achievement}</span>
-              ))
-            }
-          </section>
         </div>
       </section>
 
@@ -236,7 +240,7 @@ const Portfolio = () => {
             </p>
           </header>
 
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <li key={index}>
                 <ServiceCard service={service} />

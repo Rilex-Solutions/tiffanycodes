@@ -2,8 +2,8 @@
  * Application constants
  */
 
-// Navigation items in order
-export const NAV_ITEMS = ["services", "resume", "portfolio", "about", "contact"];
+// Navigation items in order - matches page flow
+export const NAV_ITEMS = ["about", "resume", "services", "portfolio", "contact"];
 
 // Scroll threshold for navbar background change
 export const SCROLL_THRESHOLD = 50;

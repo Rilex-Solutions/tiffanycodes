@@ -141,16 +141,16 @@ const Portfolio = () => {
                 <h2 className="section-title">About Me</h2>
                 <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                   <p>
-                    Hey there! I'm Tiffany – the Full Stack Developer who brings 15+ years of educational leadership superpowers to every project I touch.
+                    Hey there! I'm Tiffany, the educator-turned-tech-leader who brings 15+ years of educational expertise and genuine magic to everything I build.✨
                   </p>
                   <p>
-                    Think of me as your technical translator: I take complex problems, sprinkle in some creative magic, and deliver solutions that make users go "wow, this actually makes sense!" From architecting literacy platforms serving thousands of students nationwide to hosting 40+ live coding showcases, I'm equally at home debugging Ruby on Rails backends and cheering on bootcamp students as they tackle their first algorithms.
+                    I'm your strategic problem-solver who speaks three languages fluently: Educator, Developer, and Product Leader. Whether you need someone to lead cross-functional teams delivering platforms to thousands of users, architect full-stack solutions with Ruby on Rails and React, or provide strategic consulting on educational technology implementations, I bring the same core strength: understanding both the human problem AND how to build the technical solution.
                   </p>
                   <p>
-                    I've spent years in special education classrooms, which means I'm practically a wizard at making technology accessible, intuitive, and genuinely helpful. I don't just write code – I craft experiences that work for everyone, including the users most other developers forget about.
+                    I've spent years in special education classrooms, which means I'm practically a wizard at making technology accessible, intuitive, and genuinely helpful. I don't just write code, I craft experiences that work for everyone, including the users most other developers forget about.
                   </p>
                   <p>
-                    Currently available for exciting new opportunities while continuing as a Technical Livestream Host and building custom websites and applications for clients, because why choose one passion when you can excel at multiple? I'm the person who gets genuinely excited about sprint planning, celebrates every successful deployment, and believes that the best technology is the kind that feels like it was built just for you.
+                    Currently available for EdTech consulting engagements, technical product leadership roles, or full-stack development projects, because why choose one passion when you can excel at multiple? I'm the person who gets genuinely excited about sprint planning, celebrates every successful deployment, and believes that the best technology is the kind that feels like it was built just for you.
                   </p>
                 </div>
               </header>

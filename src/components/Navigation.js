@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { NAV_ITEMS } from "../constants";
 
@@ -13,6 +14,8 @@ import { NAV_ITEMS } from "../constants";
  * @returns {JSX.Element} Navigation component
  */
 const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -21,10 +24,7 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div 
-            className="flex items-center cursor-pointer"
-            onClick={() => scrollToSection("hero")}
-          >
+          <Link to="/" className="flex items-center">
             <img 
               src="/images/unicorn.png" 
               alt="Unicorn logo" 
@@ -33,11 +33,11 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
             <span className="ml-2 font-bold text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
               Tiffany Hall
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            {NAV_ITEMS.map((item) => (
+            {isHomePage && NAV_ITEMS.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -46,6 +46,24 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
                 {item}
               </button>
             ))}
+            {!isHomePage && (
+              <Link
+                to="/"
+                className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
+              >
+                Home
+              </Link>
+            )}
+            <Link
+              to="/blog"
+              className={`transition-colors font-medium ${
+                location.pathname === "/blog"
+                  ? "text-purple-600"
+                  : "text-gray-700 hover:text-purple-600"
+              }`}
+            >
+              Blog
+            </Link>
           </div>
 
           {/* Desktop CTA */}
@@ -78,7 +96,7 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
           className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100"
         >
           <div className="px-4 py-3 space-y-3">
-            {NAV_ITEMS.map((item) => (
+            {isHomePage && NAV_ITEMS.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -87,6 +105,26 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
                 {item}
               </button>
             ))}
+            {!isHomePage && (
+              <Link
+                to="/"
+                className="block w-full text-left px-3 py-2 text-gray-700 hover:text-purple-600"
+                onClick={() => toggleMenu()}
+              >
+                Home
+              </Link>
+            )}
+            <Link
+              to="/blog"
+              className={`block w-full text-left px-3 py-2 transition-colors ${
+                location.pathname === "/blog"
+                  ? "text-purple-600"
+                  : "text-gray-700 hover:text-purple-600"
+              }`}
+              onClick={() => toggleMenu()}
+            >
+              Blog
+            </Link>
             <a
               href="mailto:tiffanycodes.co@gmail.com?subject=Let's be awesome together, Tiffany!"
               className="w-full mt-3 bg-gradient-to-r from-purple-700 to-pink-700 text-white px-6 py-2 rounded-full hover:from-purple-800 hover:to-pink-800 transition-all duration-300 inline-block text-center text-decoration-none"

@@ -151,7 +151,7 @@ export const personalInfo = {
   email: "tiffanycodes.co@gmail.com",
   location: "Remote",
   github: "https://github.com/tHALL3000",
-  linkedin: "https://linkedin.com/in/tiffany-hall-codes"
+  linkedin: "https://linkedin.com/in/tiffany-hall-colorado"
 };
 ```
 

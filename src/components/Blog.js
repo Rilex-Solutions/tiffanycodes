@@ -1,77 +1,112 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-/**
- * Blog page component
- * @returns {JSX.Element} Blog page
- */
+// Components
+import Navigation from "./Navigation";
+import BlogCard from "./BlogCard";
+import BlogModal from "./BlogModal";
+
+// Data
+import { blogPosts } from "../data/blogPosts";
+
+// Constants
+import { SCROLL_THRESHOLD } from "../constants";
+
 const Blog = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [modalContent, setModalContent] = useState(null);
+  const [loadingContent, setLoadingContent] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(prev => !prev);
+  };
+
+  const handleOpenModal = async (post) => {
+    setSelectedPost(post);
+    setLoadingContent(true);
+    setModalContent(null);
+    
+    try {
+      const response = await fetch(`/blog/posts/${post.slug}.json`);
+      const data = await response.json();
+      setModalContent(data.content);
+    } catch (error) {
+      console.error('Failed to load blog content:', error);
+      setModalContent('Failed to load content. Please try again.');
+    } finally {
+      setLoadingContent(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedPost(null);
+    setModalContent(null);
+    setLoadingContent(false);
+  };
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation Header */}
-      <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
+      <Navigation 
+        isMenuOpen={isMenuOpen}
+        toggleMenu={toggleMenu}
+        scrollToSection={() => {}}
+        isScrolled={isScrolled}
+      />
+
+      <section className="hero-section pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <Link to="/" className="flex items-center">
-              <img 
-                src="/images/unicorn.png" 
-                alt="Unicorn logo" 
-                className="w-8 h-8"
+          <div className="text-center space-y-8">
+            <header className="space-y-6">
+              <h1 className="hero-title">
+                <span className="gradient-text-purple">TiffanyCodes</span>
+              </h1>
+              
+              <p className="hero-description mx-auto max-w-2xl">
+                Crafting thoughts, tutorials, and insights with the same care I put into code.
+              </p>
+            </header>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogPosts.map((post) => (
+              <BlogCard
+                key={post.id}
+                post={post}
+                onOpenModal={handleOpenModal}
               />
-              <span className="ml-2 font-bold text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Tiffany Hall
-              </span>
-            </Link>
-
-            {/* Navigation Links */}
-            <div className="flex space-x-8">
-              <Link
-                to="/"
-                className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
-              >
-                Home
-              </Link>
-              <span className="text-purple-600 font-medium">
-                Blog
-              </span>
-            </div>
+            ))}
           </div>
-        </div>
-      </nav>
-
-      {/* Blog Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-            TiffanyCodes
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Thoughts, tutorials, and insights from a developer who believes in adding a little sparkle to everything.
-          </p>
-        </div>
-
-        {/* Coming Soon Section */}
-        <div className="text-center py-20">
-          <div className="inline-block p-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl">
-            <div className="text-6xl mb-4">✨</div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Blog Coming Soon!
-            </h2>
-            <p className="text-gray-600 mb-6">
-              I'm working on bringing you amazing content. Stay tuned for tutorials, 
-              insights, and maybe a few sparkly surprises.
-            </p>
-            <Link
-              to="/"
-              className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              Back to Home
+          
+          <div className="text-center mt-16">
+            <Link to="/" className="btn-primary">
+              Back to Portfolio
             </Link>
           </div>
         </div>
-      </div>
+      </section>
+
+      <BlogModal
+        post={selectedPost}
+        isOpen={!!selectedPost}
+        onClose={handleCloseModal}
+        content={modalContent}
+        loadingContent={loadingContent}
+      />
     </div>
   );
 };

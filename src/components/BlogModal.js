@@ -37,6 +37,31 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
     });
   };
 
+  const linkifyUrls = (text) => {
+    const urlRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]]*)/g;
+    return text.replace(urlRegex, (url) => {
+      // Check if it's an external link (not tiffanycodes.com)
+      const isExternal = !url.includes('tiffanycodes.com');
+      
+      // Handle .gs files and other code files specifically
+      let finalUrl = url;
+      let linkText = url;
+      
+      if (url.endsWith('.gs')) {
+        linkText = `Click here to download the Apps Script code you need to copy`;
+      } else if (url.endsWith('.txt')) {
+        linkText = `Click here to view the Apps Script code you need to copy`;
+      } else if (url.endsWith('.js') || url.endsWith('.py')) {
+        linkText = `Click here to download the ${url.split('/').pop()} file`;
+      }
+      
+      const targetAttr = isExternal ? 'target="_blank"' : '';
+      const relAttr = isExternal ? 'rel="noopener noreferrer"' : 'rel="noopener"';
+      
+      return `<a href="${finalUrl}" ${targetAttr} ${relAttr} class="text-purple-600 hover:text-purple-800 underline">${linkText}</a>`;
+    });
+  };
+
   if (!isOpen || !post) return null;
 
   return (
@@ -111,7 +136,7 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
               <div 
                 className="prose prose-lg prose-purple max-w-none"
                 dangerouslySetInnerHTML={{ 
-                  __html: content.replace(/\n/g, '<br/>') 
+                  __html: linkifyUrls(content.replace(/\n/g, '<br/>'))
                 }}
               />
             ) : (

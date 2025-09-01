@@ -74,7 +74,8 @@
 }
 
 .profile-image {
-  @apply w-full h-full object-contain rounded-full;
+  @apply w-full h-full object-cover rounded-full;
+  transform: scale(1.15) translateY(-6%);
 }
 
 .animated-dots {

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { NAV_ITEMS } from "../constants";
+import { useActiveSection } from "../hooks/useActiveSection";
 
 /**
  * Navigation component with responsive design and smooth scrolling
@@ -16,6 +17,7 @@ import { NAV_ITEMS } from "../constants";
 const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const activeSection = useActiveSection(NAV_ITEMS);
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -36,12 +38,14 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-2">
             {isHomePage && NAV_ITEMS.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-gray-700 hover:text-purple-600 transition-colors capitalize font-medium"
+                className={`nav-link capitalize ${
+                  activeSection === item ? 'active' : ''
+                }`}
               >
                 {item}
               </button>
@@ -49,17 +53,15 @@ const Navigation = ({ isMenuOpen, toggleMenu, scrollToSection, isScrolled }) => 
             {!isHomePage && (
               <Link
                 to="/"
-                className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
+                className="nav-link"
               >
                 Home
               </Link>
             )}
             <Link
               to="/blog"
-              className={`transition-colors font-medium ${
-                location.pathname === "/blog"
-                  ? "text-purple-600"
-                  : "text-gray-700 hover:text-purple-600"
+              className={`nav-link ${
+                location.pathname === "/blog" ? 'active' : ''
               }`}
             >
               Blog

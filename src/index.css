@@ -27,3 +27,81 @@
     overflow: hidden;
   }
 }
+
+@layer components {
+  .markdown-content h1 {
+    @apply text-3xl font-bold mt-8 mb-6;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #581c87; /* Deep purple */
+    border-bottom: 3px solid #ec4899; /* Hot pink underline */
+    padding-bottom: 0.5rem;
+  }
+  
+  .markdown-content h2 {
+    @apply text-2xl font-bold mt-8 mb-4 pb-2;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #581c87; /* Deep purple */
+    border-bottom: 2px solid #ec4899; /* Hot pink underline */
+  }
+  
+  .markdown-content h3 {
+    @apply text-xl font-semibold mt-6 mb-3;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #581c87; /* Deep purple */
+    border-bottom: 1px solid #ec4899; /* Thinner hot pink underline */
+    padding-bottom: 0.25rem;
+  }
+  
+  .markdown-content h4 {
+    @apply text-lg font-semibold mt-4 mb-2;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #581c87; /* Deep purple */
+  }
+  
+  .markdown-content p {
+    @apply mb-4 leading-relaxed;
+  }
+  
+  .markdown-content ul, .markdown-content ol {
+    @apply mb-4 ml-6;
+  }
+  
+  .markdown-content li {
+    @apply mb-1;
+  }
+  
+  .markdown-content blockquote {
+    @apply border-l-4 border-purple-500 pl-4 italic text-gray-700 my-4;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+  }
+  
+  .markdown-content code {
+    @apply bg-gray-100 px-2 py-1 rounded text-sm text-purple-700;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+  }
+  
+  .markdown-content pre {
+    @apply bg-gray-900 rounded-lg p-4 overflow-x-auto my-4;
+  }
+  
+  .markdown-content pre code {
+    @apply bg-transparent px-0 py-0 text-gray-100;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+  }
+  
+  /* Blog excerpt styling */
+  .blog-excerpt {
+    color: #14b8a6; /* Turquoise color */
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+}

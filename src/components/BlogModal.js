@@ -1,4 +1,13 @@
 import React, { useEffect, useRef } from "react";
+import { marked } from "marked";
+import Prism from "prismjs";
+import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-jsx";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-css";
+import "prismjs/components/prism-json";
+import "prismjs/components/prism-bash";
 
 const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
   const modalRef = useRef(null);
@@ -23,6 +32,17 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
     };
   }, [isOpen, onClose]);
 
+  // Trigger syntax highlighting when content changes
+  useEffect(() => {
+    if (content && isOpen) {
+      // Small delay to ensure DOM is updated
+      setTimeout(() => {
+        console.log('Running Prism.highlightAll()');
+        Prism.highlightAll();
+      }, 100);
+    }
+  }, [content, isOpen]);
+
   const handleBackdropClick = (e) => {
     if (e.target === modalRef.current) {
       onClose();
@@ -37,13 +57,36 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
     });
   };
 
-  const linkifyUrls = (text) => {
-    const urlRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]]*)/g;
-    return text.replace(urlRegex, (url) => {
+  const processMarkdown = (markdownText) => {
+    // Configure marked for better parsing with syntax highlighting
+    marked.setOptions({
+      gfm: true,
+      breaks: true,
+      sanitize: false,
+      highlight: function(code, lang) {
+        console.log('Highlighting code block with language:', lang);
+        if (lang && Prism.languages[lang]) {
+          return Prism.highlight(code, Prism.languages[lang], lang);
+        }
+        return code;
+      }
+    });
+
+    // Convert markdown to HTML
+    let html = marked(markdownText);
+    
+    // Apply URL linking
+    return linkifyUrls(html);
+  };
+
+  const linkifyUrls = (html) => {
+    // More careful regex to avoid breaking HTML tags
+    const urlRegex = /(?<!["=])(https?:\/\/[^\s<>"{}|\\^`[\]]*)/g;
+    return html.replace(urlRegex, (url) => {
       // Check if it's an external link (not tiffanycodes.com)
       const isExternal = !url.includes('tiffanycodes.com');
       
-      // Handle .gs files and other code files specifically
+      // Handle different file types
       let finalUrl = url;
       let linkText = url;
       
@@ -123,7 +166,7 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
           </div>
 
           <div className="p-6 md:p-8">
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="blog-excerpt">
               {post.excerpt}
             </p>
 
@@ -134,9 +177,9 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
               </div>
             ) : content ? (
               <div 
-                className="prose prose-lg prose-purple max-w-none"
+                className="prose prose-lg prose-purple max-w-none markdown-content"
                 dangerouslySetInnerHTML={{ 
-                  __html: linkifyUrls(content.replace(/\n/g, '<br/>'))
+                  __html: processMarkdown(content)
                 }}
               />
             ) : (

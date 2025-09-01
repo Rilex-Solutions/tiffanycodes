@@ -52,6 +52,7 @@ const Blog = () => {
     
     const fullPost = await fetchBlogPost(post.slug);
     if (fullPost) {
+      console.log('Content with newlines:', JSON.stringify(fullPost.content.substring(0, 200)));
       setModalContent(fullPost.content);
     } else {
       setModalContent('Failed to load content. Please try again.');

@@ -144,7 +144,7 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
                 e.target.style.display = "none";
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/40" />
             <div className="absolute bottom-6 left-6 right-16 text-white">
               <div className="flex items-center gap-4 text-sm mb-3 opacity-90">
                 <span>{formatDate(post.date)}</span>

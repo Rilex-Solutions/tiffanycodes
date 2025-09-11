@@ -16,6 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Portfolio />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<Blog />} />
         <Route path="/resume/:type" element={<ResumeViewer />} />
       </Routes>
     </ErrorBoundary>

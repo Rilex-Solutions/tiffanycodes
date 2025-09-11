@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BlogCard = ({ post, onOpenModal }) => {
+  const navigate = useNavigate();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef(null);
@@ -24,7 +26,7 @@ const BlogCard = ({ post, onOpenModal }) => {
   }, []);
 
   const handleCardClick = () => {
-    onOpenModal(post);
+    navigate(`/blog/${post.slug}`);
   };
 
   const formatDate = (dateString) => {

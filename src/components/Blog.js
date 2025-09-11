@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 // Components
 import Navigation from "./Navigation";
@@ -13,6 +13,8 @@ import { fetchBlogPosts, fetchBlogPost } from "../data/blogPosts";
 import { SCROLL_THRESHOLD } from "../constants";
 
 const Blog = () => {
+  const { slug } = useParams();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
@@ -41,9 +43,18 @@ const Blog = () => {
     loadBlogPosts();
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
-  };
+  // Handle direct blog post URLs
+  useEffect(() => {
+    if (slug && blogPosts.length > 0) {
+      const post = blogPosts.find(p => p.slug === slug);
+      if (post) {
+        handleOpenModal(post);
+      } else {
+        // Post not found, redirect to blog listing
+        navigate('/blog');
+      }
+    }
+  }, [slug, blogPosts, navigate]);
 
   const handleOpenModal = async (post) => {
     setSelectedPost(post);
@@ -60,10 +71,18 @@ const Blog = () => {
     setLoadingContent(false);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(prev => !prev);
+  };
+
   const handleCloseModal = () => {
     setSelectedPost(null);
     setModalContent(null);
     setLoadingContent(false);
+    // Update URL to blog listing if we're on a specific post page
+    if (slug) {
+      navigate('/blog');
+    }
   };
 
   return (

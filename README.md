@@ -67,12 +67,16 @@ tiffanycodes/
 │   │   ├── ProjectCard.js      # Project showcase cards
 │   │   ├── ServiceCard.js      # Services display cards
 │   │   ├── ResumeCard.js       # Resume download cards
-│   │   └── RotatingTitles.js   # Hero section animated titles
+│   │   ├── RotatingTitles.js   # Hero section animated titles
+│   │   ├── Blog.js             # Blog listing component
+│   │   ├── BlogCard.js         # Individual blog post cards
+│   │   └── BlogModal.js        # Blog post modal viewer
 │   ├── data/
 │   │   ├── personal.js         # Personal info & contact
 │   │   ├── services.js         # 3-column services data
 │   │   ├── projects.js         # Portfolio projects
-│   │   └── resumes.js          # Resume configurations
+│   │   ├── resumes.js          # Resume configurations
+│   │   └── blogPosts.js        # Blog API integration
 │   └── App.css                 # Global styles (Tailwind + custom)
 └── package.json
 ```
@@ -186,6 +190,80 @@ The responsive PDF viewer uses conditional rendering. Test on actual mobile devi
 - CNAME file must contain your custom domain
 - Deploy creates a separate `gh-pages` branch
 
+## 📝 Blog System
+
+### Architecture Overview
+The blog system uses a **hybrid approach** combining dynamic API content with static styling:
+
+### 1. **Content Source**
+- **Blog API**: `https://tiffanycodes-blog-api.pages.dev`
+- **Metadata Endpoint**: `/metadata/index.json` (post listings)
+- **Content Endpoint**: `/posts/{slug}.json` (individual posts)
+
+### 2. **Data Flow**
+```javascript
+// Blog posts are fetched dynamically via API
+export const fetchBlogPosts = async () => {
+  const response = await fetch(`${BLOG_API_URL}/metadata/index.json`);
+  return response.json().posts || [];
+};
+```
+
+### 3. **Styling Pipeline**
+The blog content gets processed through multiple layers:
+
+#### **JSON Structure → React Components**
+- `BlogCard.js`: Displays blog post cards with metadata
+- `BlogModal.js`: Full blog post viewer with content processing
+
+#### **Markdown Processing**
+- **Marked.js**: Converts markdown content to HTML
+- **Prism.js**: Provides syntax highlighting for code blocks
+- **Custom URL Processing**: Auto-linkifies URLs with special file handling
+
+#### **CSS Styling Approach**
+```javascript
+// Applied to rendered markdown content:
+<div className="prose prose-lg prose-purple max-w-none markdown-content">
+```
+
+**Multi-layered styling:**
+1. **Tailwind Prose**: Base typography (`prose prose-lg prose-purple`)
+2. **Custom CSS**: `.markdown-content` class rules (src/index.css:32-108)
+
+#### **Custom Markdown Styles**
+- **Headers**: Purple color (#581c87) with hot pink underlines (#ec4899)
+- **Code blocks**: Dark theme with JetBrains Mono font + Prism.js highlighting
+- **Links**: Purple with hover effects and text shadows
+- **Excerpts**: Turquoise color (#14b8a6) in italics
+- **Typography**: Poppins font family for headings, Inter for body
+
+### 4. **Style Application Method**
+```javascript
+// BlogModal.js processing pipeline:
+const processMarkdown = (markdownText) => {
+  marked.setOptions({
+    highlight: function(code, lang) {
+      if (lang && Prism.languages[lang]) {
+        return Prism.highlight(code, Prism.languages[lang], lang);
+      }
+      return code;
+    }
+  });
+
+  let html = marked(markdownText);
+  return linkifyUrls(html); // Custom URL processing
+};
+```
+
+### 5. **Supported Code Languages**
+- JavaScript/JSX
+- Python
+- CSS
+- JSON
+- Bash
+- More via Prism.js components
+
 ## 📞 Contact & Support
 
 - **Email**: tiffanycodes.co@gmail.com
@@ -194,6 +272,6 @@ The responsive PDF viewer uses conditional rendering. Test on actual mobile devi
 
 ---
 
-**Last Updated**: August 2025  
-**Node Version**: v16+  
+**Last Updated**: September 2025
+**Node Version**: v16+
 **React Version**: 19.1.0

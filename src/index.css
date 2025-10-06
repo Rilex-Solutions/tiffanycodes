@@ -106,7 +106,14 @@
     @apply decoration-purple-800;
     text-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
   }
-  
+
+  /* Light purple highlight section */
+  .markdown-content .highlight {
+    @apply p-4 rounded-lg my-4;
+    background-color: rgba(139, 92, 246, 0.1); /* More translucent purple */
+    font-family: 'Inter', sans-serif;
+  }
+
   /* Blog excerpt styling */
   .blog-excerpt {
     color: #14b8a6; /* Turquoise color */

@@ -64,7 +64,6 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
       breaks: true,
       sanitize: false,
       highlight: function(code, lang) {
-        console.log('Highlighting code block with language:', lang);
         if (lang && Prism.languages[lang]) {
           return Prism.highlight(code, Prism.languages[lang], lang);
         }
@@ -73,36 +72,55 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
     });
 
     // Convert markdown to HTML
-    let html = marked(markdownText);
-    
-    // Apply URL linking
+    let html = marked.parse(markdownText);
+
+    // Post-process the HTML to add our custom styling to links
+    html = html.replace(/<a href="([^"]*)"([^>]*)>/g, (match, href, rest) => {
+      const isExternal = !href.includes('tiffanycodes.com');
+      const target = isExternal ? ' target="_blank"' : '';
+      const rel = isExternal ? ' rel="noopener noreferrer"' : ' rel="noopener"';
+
+      return `<a href="${href}"${target}${rel} class="text-purple-600 hover:text-purple-800 underline"${rest}>`;
+    });
+
+    // Apply URL linking only to bare URLs (not already in links)
     return linkifyUrls(html);
   };
 
   const linkifyUrls = (html) => {
-    // More careful regex to avoid breaking HTML tags
-    const urlRegex = /(?<!["=])(https?:\/\/[^\s<>"{}|\\^`[\]]*)/g;
-    return html.replace(urlRegex, (url) => {
-      // Check if it's an external link (not tiffanycodes.com)
-      const isExternal = !url.includes('tiffanycodes.com');
-      
-      // Handle different file types
-      let finalUrl = url;
-      let linkText = url;
-      
-      if (url.endsWith('.gs')) {
-        linkText = `Click here to download the Apps Script code you need to copy`;
-      } else if (url.endsWith('.txt')) {
-        linkText = `Click here to view the Apps Script code you need to copy`;
-      } else if (url.endsWith('.js') || url.endsWith('.py')) {
-        linkText = `Click here to download the ${url.split('/').pop()} file`;
+    // Split by <a> tags to avoid processing URLs inside existing links
+    const parts = html.split(/(<a[^>]*>.*?<\/a>)/g);
+
+    return parts.map((part, index) => {
+      // If this part is an <a> tag, leave it unchanged
+      if (part.match(/^<a[^>]*>.*<\/a>$/)) {
+        return part;
       }
-      
-      const targetAttr = isExternal ? 'target="_blank"' : '';
-      const relAttr = isExternal ? 'rel="noopener noreferrer"' : 'rel="noopener"';
-      
-      return `<a href="${finalUrl}" ${targetAttr} ${relAttr} class="text-purple-600 hover:text-purple-800 underline">${linkText}</a>`;
-    });
+
+      // Otherwise, process bare URLs in this part
+      const urlRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]]*)/g;
+      return part.replace(urlRegex, (url) => {
+        // Check if it's an external link (not tiffanycodes.com)
+        const isExternal = !url.includes('tiffanycodes.com');
+
+        // Handle different file types
+        let finalUrl = url;
+        let linkText = url;
+
+        if (url.endsWith('.gs')) {
+          linkText = `Click here to download the Apps Script code you need to copy`;
+        } else if (url.endsWith('.txt')) {
+          linkText = `Click here to view the Apps Script code you need to copy`;
+        } else if (url.endsWith('.js') || url.endsWith('.py')) {
+          linkText = `Click here to download the ${url.split('/').pop()} file`;
+        }
+
+        const targetAttr = isExternal ? 'target="_blank"' : '';
+        const relAttr = isExternal ? 'rel="noopener noreferrer"' : 'rel="noopener"';
+
+        return `<a href="${finalUrl}" ${targetAttr} ${relAttr} class="text-purple-600 hover:text-purple-800 underline">${linkText}</a>`;
+      });
+    }).join('');
   };
 
   if (!isOpen || !post) return null;

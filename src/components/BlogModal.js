@@ -83,6 +83,20 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
       return `<a href="${href}"${target}${rel} class="text-purple-600 hover:text-purple-800 underline"${rest}>`;
     });
 
+    // Wrap images with download links
+    html = html.replace(/<img([^>]*?)src="([^"]*)"([^>]*)>/g, (match, before, src, after) => {
+      // Extract alt text if present
+      const altMatch = match.match(/alt="([^"]*)"/);
+      const altText = altMatch ? altMatch[1] : 'Image';
+
+      // Get filename from URL for download attribute
+      const filename = src.split('/').pop() || 'image.jpg';
+
+      return `<a href="${src}" download="${filename}" class="image-download-link" title="Click to download ${altText}">
+        <img${before}src="${src}"${after}>
+      </a>`;
+    });
+
     // Apply URL linking only to bare URLs (not already in links)
     return linkifyUrls(html);
   };

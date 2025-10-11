@@ -122,6 +122,50 @@
     line-height: 1.6;
     margin-bottom: 2rem;
   }
+
+  /* Downloadable image styling */
+  .markdown-content img {
+    @apply rounded-lg shadow-md my-6 mx-auto cursor-pointer transition-all duration-300;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .markdown-content img:hover {
+    @apply shadow-xl transform scale-105;
+    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+  }
+
+  .markdown-content a.image-download-link {
+    @apply block relative no-underline;
+    text-decoration: none;
+  }
+
+  .markdown-content a.image-download-link::after {
+    content: '⬇ Click to download';
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(88, 28, 135, 0.9);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    font-style: normal;
+    text-decoration: none;
+    backdrop-filter: blur(4px);
+  }
+
+  .markdown-content a.image-download-link:hover::after {
+    opacity: 1;
+  }
+
+  .markdown-content a.image-download-link:hover {
+    text-decoration: none;
+  }
   
   /* Enhanced Navigation Styles */
   .nav-link {

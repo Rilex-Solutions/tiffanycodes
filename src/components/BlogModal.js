@@ -74,27 +74,32 @@ const BlogModal = ({ post, isOpen, onClose, content, loadingContent }) => {
     // Convert markdown to HTML
     let html = marked.parse(markdownText);
 
+    // First, wrap all standalone images with download links
+    html = html.replace(/<p>(<img[^>]*>)<\/p>/g, (_, img) => {
+      const srcMatch = img.match(/src="([^"]*)"/);
+      const altMatch = img.match(/alt="([^"]*)"/);
+
+      if (!srcMatch) return `<p>${img}</p>`;
+
+      const src = srcMatch[1];
+      const altText = altMatch ? altMatch[1] : 'Image';
+      const filename = src.split('/').pop() || 'image.jpg';
+
+      return `<p><a href="${src}" download="${filename}" class="image-download-link" title="Click to download ${altText}">${img}</a></p>`;
+    });
+
     // Post-process the HTML to add our custom styling to links
     html = html.replace(/<a href="([^"]*)"([^>]*)>/g, (match, href, rest) => {
+      // Skip if already has class attribute (like our image-download-link)
+      if (rest.includes('class=')) {
+        return match;
+      }
+
       const isExternal = !href.includes('tiffanycodes.com');
       const target = isExternal ? ' target="_blank"' : '';
       const rel = isExternal ? ' rel="noopener noreferrer"' : ' rel="noopener"';
 
       return `<a href="${href}"${target}${rel} class="text-purple-600 hover:text-purple-800 underline"${rest}>`;
-    });
-
-    // Wrap images with download links
-    html = html.replace(/<img([^>]*?)src="([^"]*)"([^>]*)>/g, (match, before, src, after) => {
-      // Extract alt text if present
-      const altMatch = match.match(/alt="([^"]*)"/);
-      const altText = altMatch ? altMatch[1] : 'Image';
-
-      // Get filename from URL for download attribute
-      const filename = src.split('/').pop() || 'image.jpg';
-
-      return `<a href="${src}" download="${filename}" class="image-download-link" title="Click to download ${altText}">
-        <img${before}src="${src}"${after}>
-      </a>`;
     });
 
     // Apply URL linking only to bare URLs (not already in links)

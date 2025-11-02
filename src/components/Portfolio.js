@@ -62,11 +62,6 @@ const Portfolio = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <main className="space-y-8">
-              <aside className="availability-badge">
-                <MapPin size={16} className="mr-2" />
-                Available for remote work
-              </aside>
-
               <header className="space-y-6">
                 <h1 className="hero-title">
                   <RotatingTitles animationDuration={9} />
